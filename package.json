@@ -1,0 +1,24 @@
+{
+  "name": "bulls-cows",
+  "version": "1.0.0",
+  "description": "Bulls and Cows",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "prerelease": "npm run build",
+    "release": "npm publish --access public"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.10",
+    "typescript": "^3.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arzyu/bulls-cows"
+  },
+  "license": "MIT"
+}
