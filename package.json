@@ -9,8 +9,7 @@
   ],
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "prerelease": "npm run build",
-    "release": "npm publish --access public"
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^10.12.10",
