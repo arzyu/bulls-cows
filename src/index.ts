@@ -1,8 +1,27 @@
-export default class BullsCows {
-  private secret: number[];
+export type Secret = ReadonlyArray<number>;
 
-  constructor() {
-    this.secret = this.generate();
+export type Record = Readonly<{
+  numbers: Secret;
+  a: number;
+  b: number;
+}>;
+
+export type BullsCowsData = Readonly<{
+  secret: Secret;
+  records: Record[];
+}>;
+
+export default class BullsCows {
+  readonly secret: Secret;
+  readonly records: Record[];
+
+  constructor(data?: BullsCowsData) {
+    if (!data) {
+      data = { secret: this.generate(), records: [] };
+    }
+
+    this.secret = data.secret;
+    this.records = data.records;
   }
 
   generate(length = 4) {
@@ -18,7 +37,7 @@ export default class BullsCows {
     return secret;
   }
 
-  check(numbers: number[]) {
+  guess(numbers: Secret) {
     const { secret } = this;
 
     let a = 0, b = 0;
@@ -29,6 +48,14 @@ export default class BullsCows {
       if (index === i) a++; else if (index > -1) b++;
     });
 
-    return { a, b };
+    const record: Record = { numbers, a, b };
+
+    this.addRecord(record);
+
+    return record;
+  }
+
+  private addRecord(record: Record) {
+    this.records.push(record);
   }
 }
